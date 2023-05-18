@@ -7,14 +7,15 @@ if (!empty($_POST['email']) && !empty($_POST['password'])) {
   $sql = "INSERT INTO usuarios (email,pass) VALUES (:email, :password)";
   $stmt = $conn->prepare($sql);
   $stmt->bindParam(':email', $_POST['email']);
-  $pass = password_hash($_POST['password'], PASSWORD_BCRYPT);
-  $stmt->bindParam(':password', $pass);
+  // $pass = password_hash($_POST['password'], PASSWORD_BCRYPT);
+  $stmt->bindParam(':password', $_POST['password']);
+  if ($stmt->execute()) {
+    $message = 'Se ha creado satisfactoriamente un nuevo usuario!';
+  } else {
+    $message = 'disculpe ha oacurrido un error al crear su perfil';
+  }
 }
-if ($stmt->execute()) {
-  $message = 'Se ha creado satisfactoriamente un nuevo usuario!';
-} else {
-  $message = 'disculpe ha oacurrido un error al crear su perfil';
-}
+
 
 ?>
 
@@ -67,6 +68,7 @@ if ($stmt->execute()) {
           <input type="submit" value="Registrarte" required="Create Account" />
         </div>
       </form>
+      <p>Regresa a la pagina <a href="index.php">Principal</a></p>
       <p>¿ya estas registrado? <a href="login.php">Inicia sesion</a></p>
     </div>
   </div>
