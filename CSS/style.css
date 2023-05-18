@@ -186,6 +186,46 @@ width: 90%;
     color: var(--black);
     text-transform: capitalize;
 }
+/* fin de la seccion de productos principales*/
+
+/* inicio de la seccion de categoria de productos */
+.title{
+    text-align: center;
+    margin-bottom: 2.5rem;
+    font-size: 4rem;
+    color: var(--black);
+    text-transform: uppercase;
+}
+.category .box-container{
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(27rem,1fr));
+gap: 1.5rem;
+align-items: flex-start;
+}
+.category .box-container .box{
+    border: var(--border);
+    padding: 2rem;
+    text-align: center;
+
+}
+.category .box-container .box img{
+    width: 100%;
+    height: 15rem;
+    object-fit: contain;
+}
+.category .box-container .box h3{
+    font-size: 2rem;
+    margin-top: 1.5rem;
+    color:var(--black);
+    text-transform: capitalize;
+}
+.category .box-container .box:hover{
+    background-color: gray;
+}
+
+.category .box-container .box:hover h3{
+    color: var(--yellow);
+}
 
 
 
@@ -367,6 +407,9 @@ ul li:hover a{
 @media (max-width:450px){
     html{
         font-size: 50%;
+    }
+    .title{
+        font-size: 3rem;
     }
     .header .flex .logo{
         font-size: 2.3rem;
