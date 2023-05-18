@@ -10,11 +10,11 @@ if (!empty($_POST['email']) && !empty($_POST['password'])) {
 
   $message = '';
 
-  if (count($results) > 0  && password_verify($_POST['password'], $results['pass'])) {
+  if (count($results) > 0  &&  ($_POST['password'] == $results['pass'])) {
     $_SESSION['user_id'] = $results['id'];
-    header('Location:/php-index');
+    header('Location: index.php');
   } else {
-    $message = 'Tus constraseñas no coinciden';
+    $message = 'Su constraseña no coincide';
   }
 }
 ?>
