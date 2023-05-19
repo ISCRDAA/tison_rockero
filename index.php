@@ -39,9 +39,9 @@ if (isset($_SESSION['user_id'])) {
         <img src="logo de empresa/logo empresa 1.png" alt="logo de la empresa" /></a>
       <nav class="navbar">
         <a href="index.php">Inicio de pagina</a>
-        <a href="building.html">Productos</a>
+        <!-- <a href="building.html">Productos</a> -->
         <a href="building.html">Sobre nosotros</a>
-        <a href="building.html">Contacto</a>
+        <!-- <a href="building.html">Contacto</a> -->
       </nav>
       <div class="icons">
         <a href="buscar.html"> <i class="fas fa-search"></i></a>
