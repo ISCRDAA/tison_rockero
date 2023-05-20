@@ -22,8 +22,26 @@ currency=MXN"></script>
             label:'pay'
         },
         createOrder: function(data, actions){
-            return actions.
+            return actions.order.create({
+                purchase-units: [{
+                    amount: {
+                        value: 100
+                    }
+                }]
+            });
+        },
+
+        onApprove: function(data, actions) {
+            actions.order.capture().the(function (detalles){
+                window.location.herf=""
+        });
+        },
+
+        onCancel:funcion(data){
+            alert("pago cancelado");
+            console.log(data);
         }
     }).render('#paypal-button-container');
+    </script>
 </body>
 </html>
