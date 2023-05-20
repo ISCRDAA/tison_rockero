@@ -28,7 +28,7 @@ if (isset($_SESSION['user_id'])) {
   <!-- Link para los estilos de letra  -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <!-- Link de el css de el proyecto -->
-  <link rel="stylesheet" href="CSS/style.css" />
+  <link rel="stylesheet" href="/CSS/style.css" />
 </head>
 
 <body>
