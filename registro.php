@@ -2,11 +2,13 @@
 require 'database.php';
 $message = ' ';
 
-if (!empty($_POST['email']) && !empty($_POST['password'])) {
+if (!empty($_POST['name']) && !empty($_POST['email']) && !empty($_POST['password'])) {
 
-  $sql = "INSERT INTO usuarios (email,pass) VALUES (:email, :password)";
+  $sql = "INSERT INTO usuarios (nombre,email,pass) VALUES (:name,:email, :password)";
   $stmt = $conn->prepare($sql);
+  $stmt->bindParam(':name', $_POST['name']);
   $stmt->bindParam(':email', $_POST['email']);
+
   // $pass = password_hash($_POST['password'], PASSWORD_BCRYPT);
   $stmt->bindParam(':password', $_POST['password']);
   if ($stmt->execute()) {
@@ -27,7 +29,7 @@ if (!empty($_POST['email']) && !empty($_POST['password'])) {
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Registro de Cuenta</title>
-  <link rel="stylesheet" href="/CSS/loginstyle.css" />
+  <link rel="stylesheet" href="CSS/loginstyle.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 </head>
 
@@ -45,7 +47,7 @@ if (!empty($_POST['email']) && !empty($_POST['password'])) {
       <form action="registro.php" method="post">
 
         <div class="inputBox">
-          <input type="text" required="required" />
+          <input type="text" name="name" required="required" />
           <i class="fa-regular fa-user"></i>
           <span> Nombre </span>
         </div>
