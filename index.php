@@ -2,7 +2,7 @@
 session_start();
 require 'database.php';
 if (isset($_SESSION['user_id'])) {
-  $records = $conn->prepare('SELECT id, email, pass FROM usuarios WHERE id =:id');
+  $records = $conn->prepare('SELECT id,nombre, email, pass FROM usuarios WHERE id =:id');
   $records->bindParam(':id', $_SESSION['user_id']);
   $records->execute();
   $results = $records->fetch(PDO::FETCH_ASSOC);
@@ -28,7 +28,7 @@ if (isset($_SESSION['user_id'])) {
   <!-- Link para los estilos de letra  -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <!-- Link de el css de el proyecto -->
-  <link rel="stylesheet" href="/CSS/style.css" />
+  <link rel="stylesheet" href="CSS/style.css" />
 </head>
 
 <body>
@@ -51,10 +51,10 @@ if (isset($_SESSION['user_id'])) {
       </div>
       <div class="profile">
         <?php if (!empty($user)) :  ?>
-          <p class="name">Bienvenido. <?= $user['email'] ?></p>
+          <p class="name">Bienvenido: <?= $user['nombre'] ?> con el correo: <?= $user['email'] ?></p>
           <div class="flex">
             <a href="perfil.html" class="btn">perfil</a>
-            <a href="#" class="delete-btn">salir</a>
+            <a href="salir.php" class="delete-btn">salir</a>
 
           </div>
         <?php else : ?>
@@ -90,7 +90,7 @@ if (isset($_SESSION['user_id'])) {
             <span>Ordena en linea</span>
             <h3>Sudaderas</h3>
             <br />
-            <a href="building.html" class="btn">Ver mas productos</a>
+            <a href="/building.html" class="btn">Ver mas productos</a>
           </div>
           <div class="image">
             <img src="Producto/Sudadera8.jpg" alt="" />
