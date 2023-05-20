@@ -15,13 +15,15 @@ currency=MXN"></script>
 <div id="paypal-bytton.conteiner"></div>
     
 <script>
-    paypal.Buttonns({
+    paypal.Buttons({
         style:{
             color:'blue',
             shape: 'pill',
             label:'pay'
         },
-        createOrde
+        createOrder: function(data, actions){
+            return actions.
+        }
     }).render('#paypal-button-container');
 </body>
 </html>
