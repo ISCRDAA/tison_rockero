@@ -7,8 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
-    <script src="https://www.paypal.com/sdk/js?client-id=Aac83YyIIWO0b3KkQn8bbOAqK0uZ4x70f9v96R8kg272b25p6s0u0ghQaKTKZHun8fQZxPKhTKfn1qyK& 
-currency=MXN"></script>
+    <script src="https://www.paypal.com/sdk/js?client-id=AfUZ2Fnb-y_YXq7eaNYfBSjRyc-K424nIh7MBPwrLzkwlicRtrj_AnmOjKdpKG_-EiK372QUZzc8OOTX&locale=en_MX&currency=MXN"></script>
 
 </head>
 
@@ -19,9 +18,11 @@ currency=MXN"></script>
     <script>
         paypal.Buttons({
             style: {
-                color: 'blue',
+                color: 'black',
                 shape: 'pill',
-                label: 'pay'
+                label: 'buynow',
+                layout: 'vertical',
+                height: 55,
             },
             createOrder: function(data, actions) {
                 return actions.order.create({

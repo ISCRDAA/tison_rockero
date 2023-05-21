@@ -44,8 +44,8 @@ if (isset($_SESSION['user_id'])) {
         <!-- <a href="building.html">Contacto</a> -->
       </nav>
       <div class="icons">
-        <a href="buscar.html"> <i class="fas fa-search"></i></a>
-        <a href="carrito.html"><i class="fas fa-shopping-cart"></i> <span>(3)</span></a>
+
+        <a href="pago.php"><i class="fas fa-shopping-cart"></i> <span>(3)</span></a>
         <div id="user-btn" class="fas fa-user"></div>
         <div id="menu-btn" class="fas fa-bars"></div>
       </div>
