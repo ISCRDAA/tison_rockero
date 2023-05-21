@@ -241,13 +241,13 @@ if (isset($_SESSION['user_id'])) {
 
         <ul>
             <li style="--clr: #1877f2">
-                <a class="href"="#"> <i class="fa-brands fa-facebook-f"></i></a>
+                <a href="https://www.facebook.com/profile.php?id=100092618961568"> <i class="fa-brands fa-facebook-f"></i></a>
             </li>
             <li style="--clr: #c32aa3">
-                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://instagram.com/el_tizon_roqueta?igshid=NTc4MTIwNjQ2YQ=="><i class="fa-brands fa-instagram"></i></a>
             </li>
             <li style="--clr: #25d366">
-                <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+                <a href="https://api.whatsapp.com/send?phone=527751396916"><i class="fa-brands fa-whatsapp"></i></a>
             </li>
         </ul>
         <div class="credit">
