@@ -1,6 +1,11 @@
 <?php
 session_start();
 require 'database.php';
+
+$sql = $conn->prepare("SELECT id,nombre,precio FROM accesorios WHERE activo = 1");
+$sql->execute();
+$resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
+
 if (isset($_SESSION['user_id'])) {
   $records = $conn->prepare('SELECT id,nombre, email, pass FROM usuarios WHERE id =:id');
   $records->bindParam(':id', $_SESSION['user_id']);
@@ -75,141 +80,33 @@ if (isset($_SESSION['user_id'])) {
 
     </div>
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-      <div class="col">
-        <div class="card shadow-sm">
-          <img src="Producto/cosas10.jpg" alt="" width="450" height="400">
-          <div class="card-body">
-            <h2 class="card-title">SHORTS 1</h2>
-            <h2 class="card-text">$000</h2>
-            <div class="d-flex justify-content-between align-items-center">
-              <div class="btn-group">
-                <a href="" class="btn btn-primary">Detalles</a>
+      <?php foreach ($resultado as $row) {
+
+      ?>
+        <div class="col">
+          <div class="card shadow-sm">
+            <?php
+            $id = $row['id'];
+            $imagen = "Producto/$id/accesorio.jpg";
+
+            if (!file_exists($imagen)) {
+              $imagen = "Producto/no_image.png";
+            }
+            ?>
+            <img src="<?php echo $imagen;  ?>" alt="" width="450" height="400">
+            <div class="card-body">
+              <h2 class="card-title"><?php echo $row['nombre']; ?></h2>
+              <h2 class="card-text">$ <?php echo $row['precio']; ?></h2>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <a href="" class="btn btn-primary">Detalles</a>
+                </div>
+                <a href="" class="btn btn-success">Agregar</a>
               </div>
-              <a href="" class="btn btn-success">Agregar</a>
             </div>
           </div>
         </div>
-      </div>
-      <div class="col">
-        <div class="card shadow-sm">
-          <img src="Producto/cosas2.png" alt="" width="450" height="400">
-          <div class="card-body">
-            <h2 class="card-title">SHORTS 1</h2>
-            <h2 class="card-text">$000</h2>
-            <div class="d-flex justify-content-between align-items-center">
-              <div class="btn-group">
-                <a href="" class="btn btn-primary">Detalles</a>
-              </div>
-              <a href="" class="btn btn-success">Agregar</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card shadow-sm">
-          <img src="Producto/cosas3.jpg" alt="" width="450" height="400">
-          <div class="card-body">
-            <h2 class="card-title">SHORTS 1</h2>
-            <h2 class="card-text">$000</h2>
-            <div class="d-flex justify-content-between align-items-center">
-              <div class="btn-group">
-                <a href="" class="btn btn-primary">Detalles</a>
-              </div>
-              <a href="" class="btn btn-success">Agregar</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card shadow-sm">
-          <img src="Producto/cosas4.jpg" alt="" width="450" height="400">
-          <div class="card-body">
-            <h2 class="card-title">SHORTS 1</h2>
-            <h2 class="card-text">$000</h2>
-            <div class="d-flex justify-content-between align-items-center">
-              <div class="btn-group">
-                <a href="" class="btn btn-primary">Detalles</a>
-              </div>
-              <a href="" class="btn btn-success">Agregar</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card shadow-sm">
-          <img src="Producto/cosas5.jpg" alt="" width="450" height="400">
-          <div class="card-body">
-            <h2 class="card-title">SHORTS 1</h2>
-            <h2 class="card-text">$000</h2>
-            <div class="d-flex justify-content-between align-items-center">
-              <div class="btn-group">
-                <a href="" class="btn btn-primary">Detalles</a>
-              </div>
-              <a href="" class="btn btn-success">Agregar</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card shadow-sm">
-          <img src="Producto/cosas6.jpg" alt="" width="450" height="400">
-          <div class="card-body">
-            <h2 class="card-title">SHORTS 1</h2>
-            <h2 class="card-text">$000</h2>
-            <div class="d-flex justify-content-between align-items-center">
-              <div class="btn-group">
-                <a href="" class="btn btn-primary">Detalles</a>
-              </div>
-              <a href="" class="btn btn-success">Agregar</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card shadow-sm">
-          <img src="Producto/cosas7.jpg" alt="" width="450" height="400">
-          <div class="card-body">
-            <h2 class="card-title">SHORTS 1</h2>
-            <h2 class="card-text">$000</h2>
-            <div class="d-flex justify-content-between align-items-center">
-              <div class="btn-group">
-                <a href="" class="btn btn-primary">Detalles</a>
-              </div>
-              <a href="" class="btn btn-success">Agregar</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card shadow-sm">
-          <img src="Producto/cosas8.jpg" alt="" width="450" height="400">
-          <div class="card-body">
-            <h2 class="card-title">SHORTS 1</h2>
-            <h2 class="card-text">$000</h2>
-            <div class="d-flex justify-content-between align-items-center">
-              <div class="btn-group">
-                <a href="" class="btn btn-primary">Detalles</a>
-              </div>
-              <a href="" class="btn btn-success">Agregar</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card shadow-sm">
-          <img src="Producto/cosas9.png" alt="" width="450" height="400">
-          <div class="card-body">
-            <h2 class="card-title">SHORTS 1</h2>
-            <h2 class="card-text">$000</h2>
-            <div class="d-flex justify-content-between align-items-center">
-              <div class="btn-group">
-                <a href="" class="btn btn-primary">Detalles</a>
-              </div>
-              <a href="" class="btn btn-success">Agregar</a>
-            </div>
-          </div>
-        </div>
-      </div>
+      <?php } ?>
     </div>
   </main>
 

@@ -82,7 +82,7 @@ if (isset($_SESSION['user_id'])) {
             <a href="accesorios.php" class="btn">Ver mas productos</a>
           </div>
           <div class="image">
-            <img src="Producto/cosas10.jpg" alt="" />
+            <img src="Producto/1/accesorio.jpg" alt="" />
           </div>
         </div>
         <div class="swiper-slide slide">

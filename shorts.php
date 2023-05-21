@@ -1,6 +1,10 @@
 <?php
 session_start();
 require 'database.php';
+$sql = $conn->prepare("SELECT id,nombre,precio FROM accesorios WHERE activo = 1");
+$sql->execute();
+$resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
+
 if (isset($_SESSION['user_id'])) {
   $records = $conn->prepare('SELECT id,nombre, email, pass FROM usuarios WHERE id =:id');
   $records->bindParam(':id', $_SESSION['user_id']);
