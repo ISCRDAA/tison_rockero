@@ -1,3 +1,21 @@
+<?php
+session_start();
+require 'database.php';
+if (isset($_SESSION['user_id'])) {
+  $records = $conn->prepare('SELECT id,nombre, email, pass FROM usuarios WHERE id =:id');
+  $records->bindParam(':id', $_SESSION['user_id']);
+  $records->execute();
+  $results = $records->fetch(PDO::FETCH_ASSOC);
+
+
+  $user = null;
+
+  if (count($results) > 0) {
+    $user = $results;
+  }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -60,7 +78,7 @@
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
       <div class="col">
         <div class="card shadow-sm">
-          <img src="Producto/tenis1.png" alt=""width="450" height="400">
+          <img src="Producto/tenis1.png" alt="" width="450" height="400">
           <div class="card-body">
             <h2 class="card-title">SHORTS 1</h2>
             <h2 class="card-text">$000</h2>
@@ -75,7 +93,7 @@
       </div>
       <div class="col">
         <div class="card shadow-sm">
-          <img src="Producto/tenis2.jpg" alt=""width="450" height="400">
+          <img src="Producto/tenis2.jpg" alt="" width="450" height="400">
           <div class="card-body">
             <h2 class="card-title">SHORTS 1</h2>
             <h2 class="card-text">$000</h2>
@@ -90,7 +108,7 @@
       </div>
       <div class="col">
         <div class="card shadow-sm">
-          <img src="Producto/tenis3.jpg" alt=""width="450" height="400">
+          <img src="Producto/tenis3.jpg" alt="" width="450" height="400">
           <div class="card-body">
             <h2 class="card-title">SHORTS 1</h2>
             <h2 class="card-text">$000</h2>
@@ -105,7 +123,7 @@
       </div>
       <div class="col">
         <div class="card shadow-sm">
-          <img src="Producto/tenis4.jpg" alt=""width="450" height="400">
+          <img src="Producto/tenis4.jpg" alt="" width="450" height="400">
           <div class="card-body">
             <h2 class="card-title">SHORTS 1</h2>
             <h2 class="card-text">$000</h2>
@@ -120,7 +138,7 @@
       </div>
       <div class="col">
         <div class="card shadow-sm">
-          <img src="Producto/tenis5.png" alt=""width="450" height="400">
+          <img src="Producto/tenis5.png" alt="" width="450" height="400">
           <div class="card-body">
             <h2 class="card-title">SHORTS 1</h2>
             <h2 class="card-text">$000</h2>
@@ -135,7 +153,7 @@
       </div>
       <div class="col">
         <div class="card shadow-sm">
-          <img src="Producto/tenis6.jpg" alt=""width="450" height="400">
+          <img src="Producto/tenis6.jpg" alt="" width="450" height="400">
           <div class="card-body">
             <h2 class="card-title">SHORTS 1</h2>
             <h2 class="card-text">$000</h2>
@@ -150,7 +168,7 @@
       </div>
       <div class="col">
         <div class="card shadow-sm">
-          <img src="Producto/tenis7.jpg" alt=""width="450" height="400">
+          <img src="Producto/tenis7.jpg" alt="" width="450" height="400">
           <div class="card-body">
             <h2 class="card-title">SHORTS 1</h2>
             <h2 class="card-text">$000</h2>
@@ -165,7 +183,7 @@
       </div>
       <div class="col">
         <div class="card shadow-sm">
-          <img src="Producto/tenis8.jpg" alt=""width="450" height="400">
+          <img src="Producto/tenis8.jpg" alt="" width="450" height="400">
           <div class="card-body">
             <h2 class="card-title">SHORTS 1</h2>
             <h2 class="card-text">$000</h2>
@@ -180,7 +198,7 @@
       </div>
       <div class="col">
         <div class="card shadow-sm">
-          <img src="Producto/tenis9.jpg" alt=""width="450" height="400">
+          <img src="Producto/tenis9.jpg" alt="" width="450" height="400">
           <div class="card-body">
             <h2 class="card-title">SHORTS 1</h2>
             <h2 class="card-text">$000</h2>

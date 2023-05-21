@@ -79,7 +79,7 @@ if (isset($_SESSION['user_id'])) {
             <span>Ordena en linea</span>
             <h3>Accesorios</h3>
             <br />
-            <a href="building.html" class="btn">Ver mas productos</a>
+            <a href="accesorios.php" class="btn">Ver mas productos</a>
           </div>
           <div class="image">
             <img src="Producto/cosas10.jpg" alt="" />
@@ -90,7 +90,7 @@ if (isset($_SESSION['user_id'])) {
             <span>Ordena en linea</span>
             <h3>Sudaderas</h3>
             <br />
-            <a href="/building.html" class="btn">Ver mas productos</a>
+            <a href="sudaderas.php" class="btn">Ver mas productos</a>
           </div>
           <div class="image">
             <img src="Producto/Sudadera8.jpg" alt="" />
@@ -101,7 +101,7 @@ if (isset($_SESSION['user_id'])) {
             <span>Ordena en linea</span>
             <h3>Shorts</h3>
             <br />
-            <a href="building.html" class="btn">Ver mas productos</a>
+            <a href="shorts.php" class="btn">Ver mas productos</a>
           </div>
           <div class="image">
             <img src="Producto/short7.jpg" alt="" />
@@ -112,7 +112,7 @@ if (isset($_SESSION['user_id'])) {
             <span>Ordena en linea</span>
             <h3>Tenis</h3>
             <br />
-            <a href="building.html" class="btn">Ver mas productos</a>
+            <a href="tenis.php" class="btn">Ver mas productos</a>
           </div>
           <div class="image">
             <img src="Producto/tenis9.jpg" alt="" />
@@ -127,19 +127,19 @@ if (isset($_SESSION['user_id'])) {
   <section class="category">
     <h1 class="title">Articulos en venta</h1>
     <div class="box-container">
-      <a href="productos.html" class="box">
+      <a href="accesorios.php" class="box">
         <img src="Producto/cosas1.jpg" alt="" />
         <h3>Accesorios</h3>
       </a>
-      <a href="productos.html" class="box">
+      <a href="shorts.php" class="box">
         <img src="Producto/short1.jpg" alt="" />
         <h3>Shorts deportivos</h3>
       </a>
-      <a href="productos.html" class="box">
+      <a href="sudaderas.php" class="box">
         <img src="Producto/Sudadera4.jpg" alt="" />
         <h3>Sudaderas</h3>
       </a>
-      <a href="productos.html" class="box">
+      <a href="tenis.php" class="box">
         <img src="Producto/tenis5.png" alt="" />
         <h3>Tenis deportivos</h3>
       </a>
@@ -175,13 +175,13 @@ if (isset($_SESSION['user_id'])) {
 
     <ul>
       <li style="--clr: #1877f2">
-        <a class="href"="#"> <i class="fa-brands fa-facebook-f"></i></a>
+        <a class="href"="https://www.facebook.com/profile.php?id=100068155186384&mibextid=LQQJ4d"> <i class="fa-brands fa-facebook-f"></i></a>
       </li>
       <li style="--clr: #c32aa3">
-        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://instagram.com/el_tizon_roqueta?igshid=NTc4MTIwNjQ2YQ=="><i class="fa-brands fa-instagram"></i></a>
       </li>
       <li style="--clr: #25d366">
-        <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+        <a href="https://api.whatsapp.com/send?phone=527751396916"><i class="fa-brands fa-whatsapp"></i></a>
       </li>
     </ul>
     <div class="credit">

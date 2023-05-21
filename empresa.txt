@@ -11,3 +11,11 @@ Ser una marca líder en el mercado de ropa deportiva, reconocida por ofrecer pro
 Bienvenidos a nuestra tienda en línea, especializada en la venta de ropa deportiva y artículos deportivos. Aquí encontrarás todo lo que necesitas para practicar tus deportes favoritos, ya sea en el gimnasio, en la pista, en el campo o en la montaña. En nuestra tienda, nos esforzamos por ofrecer productos de alta calidad a precios competitivos.
 
 (Diego Aldahir Sarmiento Gandiaga | www.tizonroqueta.com | tizonroqueta@gmail.com | Av. 21 de Marzo 1006, Amp Vicente Guerrero, 43630 Tulancingo de Bravo Hgo.)
+
+<?php
+require 'database.php';
+
+$sql = $conn->prepare("SELECT id,nombre,precio FROM productos WHERE activo = 1");
+$sql->execute();
+$resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
+?>
