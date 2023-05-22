@@ -104,7 +104,7 @@ if (isset($_SESSION['user_id'])) {
     </div>
   </section>
 
-  <section class="steps" style="">
+  <section class="steps">
     <h1 class="title">Nuestros socios:</h1>
 
     <div class="box-container" style="display: grid;
