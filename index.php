@@ -93,7 +93,7 @@ if (isset($_SESSION['user_id'])) {
             <a href="sudaderas.php" class="btn">Ver mas productos</a>
           </div>
           <div class="image">
-            <img src="Producto/Sudadera8.jpg" alt="" />
+            <img src="Producto/17/Sudadera.jpg" alt="" />
           </div>
         </div>
         <div class="swiper-slide slide">
@@ -104,7 +104,7 @@ if (isset($_SESSION['user_id'])) {
             <a href="shorts.php" class="btn">Ver mas productos</a>
           </div>
           <div class="image">
-            <img src="Producto/short7.jpg" alt="" />
+            <img src="Producto/28/short.jpg" alt="" />
           </div>
         </div>
         <div class="swiper-slide slide">
@@ -115,7 +115,7 @@ if (isset($_SESSION['user_id'])) {
             <a href="tenis.php" class="btn">Ver mas productos</a>
           </div>
           <div class="image">
-            <img src="Producto/tenis9.jpg" alt="" />
+            <img src="Producto/27/tenis.jpg" alt="" />
           </div>
         </div>
       </div>
@@ -128,19 +128,19 @@ if (isset($_SESSION['user_id'])) {
     <h1 class="title">Articulos en venta</h1>
     <div class="box-container">
       <a href="accesorios.php" class="box">
-        <img src="Producto/cosas1.jpg" alt="" />
+        <img src="Producto/9/accesorio.jpg" alt="" />
         <h3>Accesorios</h3>
       </a>
       <a href="shorts.php" class="box">
-        <img src="Producto/short1.jpg" alt="" />
+        <img src="Producto/28/short.jpg" alt="" />
         <h3>Shorts deportivos</h3>
       </a>
       <a href="sudaderas.php" class="box">
-        <img src="Producto/Sudadera4.jpg" alt="" />
+        <img src="Producto/14/Sudadera.jpg" alt="" />
         <h3>Sudaderas</h3>
       </a>
       <a href="tenis.php" class="box">
-        <img src="Producto/tenis5.png" alt="" />
+        <img src="Producto/23/tenis.jpg" alt="" />
         <h3>Tenis deportivos</h3>
       </a>
     </div>
