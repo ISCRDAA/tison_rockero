@@ -1,6 +1,6 @@
 <?php
-session_start();
 require 'database.php';
+require 'config.php';
 
 $sql = $conn->prepare("SELECT id,nombre,precio FROM accesorios WHERE activo = 1");
 $sql->execute();
@@ -47,12 +47,12 @@ if (isset($_SESSION['user_id'])) {
       <nav class="navbar">
         <a href="index.php">Inicio de pagina</a>
         <!-- <a href="building.html">Productos</a> -->
-        <a href="building.html">Sobre nosotros</a>
+        <a href="about.php">Sobre nosotros</a>
         <!-- <a href="building.html">Contacto</a> -->
       </nav>
       <div class="icons">
 
-        <a href="pago.php"><i class="fas fa-shopping-cart"></i> <span>(3)</span></a>
+        <a href="pago.php"><i class="fas fa-shopping-cart"></i> <span id="num_cart"><?php echo $num_cart; ?></span></a>
         <div id="user-btn" class="fas fa-user"></div>
         <div id="menu-btn" class="fas fa-bars"></div>
       </div>
@@ -93,15 +93,15 @@ if (isset($_SESSION['user_id'])) {
               $imagen = "Producto/no_image.png";
             }
             ?>
-            <img src="<?php echo $imagen;  ?>" alt="" width="450" height="400">
+            <img src="<?php echo $imagen;  ?>" alt="" width="350" height="300">
             <div class="card-body">
               <h2 class="card-title"><?php echo $row['nombre']; ?></h2>
               <h2 class="card-text">$ <?php echo $row['precio']; ?></h2>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <a href="" class="btn btn-primary">Detalles</a>
+                  <a href="accedetalles.php?id=<?php echo  $row['id']; ?>&token=<?php echo hash_hmac('sha1', $row['id'], KEY_TOKEN); ?>" class="btn btn-primary">Detalles</a>
                 </div>
-                <a href="" class="btn btn-success">Agregar</a>
+                <button class="btn btn-outline-success" type="button" onclick="addProducto( <?php echo $row['id']; ?>, '<?php echo hash_hmac('sha1', $row['id'], KEY_TOKEN); ?>')">Agregar al carrito</button>
               </div>
             </div>
           </div>
@@ -156,6 +156,28 @@ if (isset($_SESSION['user_id'])) {
   </footer>
   <!-- pie de pagina final -->
   <script src="JS/script.js"></script>
+  <script>
+    function addProducto(id, token) {
+      let url = 'carrito.php';
+      let formData = new FormData();
+      formData.append('id', id);
+      formData.append('token', token);
+
+      fetch(url, {
+          method: 'POST',
+          body: formData,
+          mode: 'cors'
+        }).then(response => response.json())
+        .then(data => {
+          if (data.ok) {
+            let elemento = document.getElementById("num_cart");
+            elemento.innerHTML = data.numero
+          }
+        })
+
+
+    }
+  </script>
 
 </body>
 

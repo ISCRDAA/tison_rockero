@@ -1,5 +1,5 @@
 <?php
-session_start();
+require 'config.php';
 require 'database.php';
 if (isset($_SESSION['user_id'])) {
   $records = $conn->prepare('SELECT id,nombre, email, pass FROM usuarios WHERE id =:id');
@@ -35,17 +35,17 @@ if (isset($_SESSION['user_id'])) {
   <!-- seccion header comienzo -->
   <header class="header">
     <section class="flex">
-      <a href="index.html" class="logo">
+      <a href="index.php" class="logo">
         <img src="logo de empresa/logo empresa 1.png" alt="logo de la empresa" /></a>
       <nav class="navbar">
         <a href="index.php">Inicio de pagina</a>
         <!-- <a href="building.html">Productos</a> -->
-        <a href="building.html">Sobre nosotros</a>
+        <a href="about.php">Sobre nosotros</a>
         <!-- <a href="building.html">Contacto</a> -->
       </nav>
       <div class="icons">
 
-        <a href="pago.php"><i class="fas fa-shopping-cart"></i> <span>(3)</span></a>
+        <a href="pago.php"><i class="fas fa-shopping-cart"></i> <span id="num_cart"><?php echo $num_cart; ?></span></a>
         <div id="user-btn" class="fas fa-user"></div>
         <div id="menu-btn" class="fas fa-bars"></div>
       </div>

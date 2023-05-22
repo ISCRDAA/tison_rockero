@@ -1,12 +1,50 @@
 <?php
-
 require 'database.php';
 require 'config.php';
 
-$sql = $conn->prepare("SELECT id,nombre,precio FROM sudaderas WHERE activo = 1");
-$sql->execute();
-$resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
+$id = isset($_GET['id']) ? $_GET['id'] : '';
+$token = isset($_GET['token']) ? $_GET['token'] : '';
+if ($id == '' || $token == '') {
+    echo 'Error al procesar la peticion';
+} else {
+    $token_tmp = hash_hmac('sha1', $id, KEY_TOKEN);
+    if ($token == $token_tmp) {
 
+        $sql = $conn->prepare("SELECT count(id)  FROM  sudaderas WHERE id=? and activo = 1");
+        $sql->execute([$id]);
+
+        if ($sql->fetchColumn() > 0) {
+
+            $sql = $conn->prepare("SELECT  nombre, descripcion, precio, descuento  FROM  sudaderas WHERE id=? and activo = 1 LIMIT 1");
+            $sql->execute([$id]);
+            $row = $sql->fetch(PDO::FETCH_ASSOC);
+            $nombre = $row['nombre'];
+            $descripcion = $row['descripcion'];
+            $precio = $row['precio'];
+            $descuento = $row['descuento'];
+            $precio_desc = $precio - (($precio * $descuento) / 100);
+            $dir_images = 'Producto/' . $id . '/';
+
+            $rutaImg = $dir_images . 'Sudadera.jpg';
+
+            if (!file_exists($rutaImg)) {
+                $rutaImg = 'Producto/no_image.png';
+            }
+            $imagenes = array();
+            $dir = dir($dir_images);
+            while (($archivo = $dir->read()) != false) {
+                if ($archivo != 'Sudadera.jpg' && (strpos($archivo, 'jpg'))) {
+                    $imagenes[] = $dir_images . $archivo;
+                }
+            }
+            $dir->close();
+        }
+        $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
+    } else {
+        echo 'Error al procesar la peticion';
+        exit;
+    }
+}
 
 
 
@@ -52,6 +90,7 @@ if (isset($_SESSION['user_id'])) {
                 <a href="index.php">Inicio de pagina</a>
                 <!-- <a href="building.html">Productos</a> -->
                 <a href="about.php">Sobre nosotros</a>
+                <a href="sudaderas.php"> Regresar a los productos</a>
                 <!-- <a href="building.html">Contacto</a> -->
             </nav>
             <div class="icons">
@@ -81,64 +120,45 @@ if (isset($_SESSION['user_id'])) {
     <!-- seccion header fin -->
     <main>
         <div class="Container">
-
-        </div>
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-            <?php foreach ($resultado as $row) {
-
-            ?>
-                <div class="col">
-                    <div class="card shadow-sm">
-                        <?php
-                        $id = $row['id'];
-                        $imagen = "Producto/$id/Sudadera.jpg";
-
-                        if (!file_exists($imagen)) {
-                            $imagen = "Producto/no_image.png";
-                        }
-                        ?>
-                        <img src="<?php echo $imagen;  ?>" alt="" width="450" height="400">
-                        <div class="card-body">
-                            <h2 class="card-title"><?php echo $row['nombre']; ?></h2>
-                            <h2 class="card-text"><?php echo $row['precio']; ?></h2>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <a href="sudadetalles.php?id=<?php echo  $row['id']; ?>&token=<?php echo hash_hmac('sha1', $row['id'], KEY_TOKEN); ?>" class="btn btn-primary">Detalles</a>
-                                </div>
-                                <button class="btn btn-outline-success" type="button" onclick="addProducto( <?php echo $row['id']; ?>, '<?php echo hash_hmac('sha1', $row['id'], KEY_TOKEN); ?>')">Agregar al carrito</button>
-                            </div>
-                        </div>
-                    </div>
+            <div class="row">
+                <div class="col-md-6 order-md-1">
+                    <img style="padding-left: 50px;" src="<?php echo $rutaImg;  ?>" alt="" width=" 350" height="300">
                 </div>
-            <?php } ?>
+                <div class="col-md-6 order-md-2">
+                    <h2 style="font-size: 50px;"><?php echo $nombre; ?></h2>
+                    <h2 style="font-size: 40px;">
+                        <?php if ($descuento > 0) { ?>
+                            <h2 style="font-size: 40px; text-decoration: line-through;"><?php echo MONEDA . $precio; ?></h2>
+                            <h2 style="font-size: 40px;"><?php echo MONEDA . $precio_desc; ?> <br><small class="text-success"> <?php echo $descuento; ?> % Descuento </small></h2>
+
+                        <?php } else { ?>
+                            <?php echo MONEDA . $precio; ?>
+                    </h2>
+                <?php } ?>
+                <p style="font-size: 30px; font-style: italic;" class="lead">
+                    <?php echo $descripcion; ?>
+                </p>
+                <div class="d-grid gap-3 col-10 mx-auto"></div>
+
+                <button class="btn btn-outline-success" type="button" onclick="addProducto( <?php echo $id; ?>, '<?php echo $token_tmp; ?>')">Agregar al carrito</button>
+
+
+                </div>
+
+            </div>
+
+
         </div>
     </main>
 
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
     <!-- Pie de pagina comienzo -->
     <footer class="footer">
-        <section class="grid">
-            <div class="box">
-                <img src="Iconos/email.png" alt="" />
-                <h3>Nuestro correo:</h3>
-                <a href="mailto:tizonrockero@gmail.com?Subject=Interesado%20en%20los%20productos">tizonrockero@gmail.com</a>
-            </div>
-            <div class="box">
-                <img src="Iconos/direccion.png" alt="" />
-                <h3>Nuestra Ubicacion</h3>
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3747.313282008436!2d-98.36991777791123!3d20.079186840965956!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d056f40e430097%3A0x5db54927b474018c!2sCalle%20Juan%20C%20Doria%20Pte%20105%2C%20Centro%201er%20Cuadro%2C%2043600%20Tulancingo%20de%20Bravo%2C%20Hgo.!5e0!3m2!1ses-419!2smx!4v1684013496725!5m2!1ses-419!2smx" width="200" height="200" style="border: 0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </div>
-
-            <div class="box">
-                <img src="Iconos/reloj.png" alt="" />
-                <h3>Horario de atencion</h3>
-                <p>08:00am A 06:00pm</p>
-            </div>
-            <div class="box">
-                <img src="Iconos/gente.png" alt="" />
-                <h3>Nosotros: <a href="building.html">Mas informacion:</a></h3>
-                <p>Somos una empresa de productos deportivos.</p>
-            </div>
-        </section>
 
         <ul>
             <li style="--clr: #1877f2">
@@ -182,7 +202,6 @@ if (isset($_SESSION['user_id'])) {
 
         }
     </script>
-
 </body>
 
 </html>

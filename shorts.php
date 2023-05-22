@@ -1,7 +1,7 @@
 <?php
-session_start();
 require 'database.php';
-$sql = $conn->prepare("SELECT id,nombre,precio FROM accesorios WHERE activo = 1");
+require 'config.php';
+$sql = $conn->prepare("SELECT id,nombre,precio FROM  shorts WHERE activo = 1");
 $sql->execute();
 $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
 
@@ -46,12 +46,12 @@ if (isset($_SESSION['user_id'])) {
       <nav class="navbar">
         <a href="index.php">Inicio de pagina</a>
         <!-- <a href="building.html">Productos</a> -->
-        <a href="building.html">Sobre nosotros</a>
+        <a href="about.php">Sobre nosotros</a>
         <!-- <a href="building.html">Contacto</a> -->
       </nav>
       <div class="icons">
 
-        <a href="pago.php"><i class="fas fa-shopping-cart"></i> <span>(3)</span></a>
+        <a href="pago.php"><i class="fas fa-shopping-cart"></i> <span id="num_cart"><?php echo $num_cart; ?></span></a>
         <div id="user-btn" class="fas fa-user"></div>
         <div id="menu-btn" class="fas fa-bars"></div>
       </div>
@@ -79,141 +79,33 @@ if (isset($_SESSION['user_id'])) {
 
     </div>
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-      <div class="col">
-        <div class="card shadow-sm">
-          <img src="Producto/short1.jpg" alt="" width="450" height="400">
-          <div class="card-body">
-            <h2 class="card-title">SHORTS 1</h2>
-            <h2 class="card-text">$000</h2>
-            <div class="d-flex justify-content-between align-items-center">
-              <div class="btn-group">
-                <a href="" class="btn btn-primary">Detalles</a>
+      <?php foreach ($resultado as $row) {
+
+      ?>
+        <div class="col">
+          <div class="card shadow-sm">
+            <?php
+            $id = $row['id'];
+            $imagen = "Producto/$id/short.jpg";
+
+            if (!file_exists($imagen)) {
+              $imagen = "Producto/no_image.png";
+            }
+            ?>
+            <img src="<?php echo $imagen;  ?>" alt="" width="350" height="300">
+            <div class="card-body">
+              <h2 class="card-title"><?php echo $row['nombre']; ?></h2>
+              <h2 class="card-text"><?php echo $row['precio']; ?></h2>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <a href="shortsdetalles.php?id=<?php echo  $row['id']; ?>&token=<?php echo hash_hmac('sha1', $row['id'], KEY_TOKEN); ?>" class="btn btn-primary">Detalles</a>
+                </div>
+                <button class="btn btn-outline-success" type="button" onclick="addProducto( <?php echo $row['id']; ?>, '<?php echo hash_hmac('sha1', $row['id'], KEY_TOKEN); ?>')">Agregar al carrito</button>
               </div>
-              <a href="" class="btn btn-success">Agregar</a>
             </div>
           </div>
         </div>
-      </div>
-      <div class="col">
-        <div class="card shadow-sm">
-          <img src="Producto/short2.jpg" alt="" width="450" height="400">
-          <div class="card-body">
-            <h2 class="card-title">SHORTS 1</h2>
-            <h2 class="card-text">$000</h2>
-            <div class="d-flex justify-content-between align-items-center">
-              <div class="btn-group">
-                <a href="" class="btn btn-primary">Detalles</a>
-              </div>
-              <a href="" class="btn btn-success">Agregar</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card shadow-sm">
-          <img src="Producto/short3.jpg" alt="" width="450" height="400">
-          <div class="card-body">
-            <h2 class="card-title">SHORTS 1</h2>
-            <h2 class="card-text">$000</h2>
-            <div class="d-flex justify-content-between align-items-center">
-              <div class="btn-group">
-                <a href="" class="btn btn-primary">Detalles</a>
-              </div>
-              <a href="" class="btn btn-success">Agregar</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card shadow-sm">
-          <img src="Producto/short4.jpg" alt="" width="450" height="400">
-          <div class="card-body">
-            <h2 class="card-title">SHORTS 1</h2>
-            <h2 class="card-text">$000</h2>
-            <div class="d-flex justify-content-between align-items-center">
-              <div class="btn-group">
-                <a href="" class="btn btn-primary">Detalles</a>
-              </div>
-              <a href="" class="btn btn-success">Agregar</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card shadow-sm">
-          <img src="Producto/short5.jpg" alt="" width="450" height="400">
-          <div class="card-body">
-            <h2 class="card-title">SHORTS 1</h2>
-            <h2 class="card-text">$000</h2>
-            <div class="d-flex justify-content-between align-items-center">
-              <div class="btn-group">
-                <a href="" class="btn btn-primary">Detalles</a>
-              </div>
-              <a href="" class="btn btn-success">Agregar</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card shadow-sm">
-          <img src="Producto/short6.jpg" alt="" width="450" height="400">
-          <div class="card-body">
-            <h2 class="card-title">SHORTS 1</h2>
-            <h2 class="card-text">$000</h2>
-            <div class="d-flex justify-content-between align-items-center">
-              <div class="btn-group">
-                <a href="" class="btn btn-primary">Detalles</a>
-              </div>
-              <a href="" class="btn btn-success">Agregar</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card shadow-sm">
-          <img src="Producto/short7.jpg" alt="" width="450" height="400">
-          <div class="card-body">
-            <h2 class="card-title">SHORTS 1</h2>
-            <h2 class="card-text">$000</h2>
-            <div class="d-flex justify-content-between align-items-center">
-              <div class="btn-group">
-                <a href="" class="btn btn-primary">Detalles</a>
-              </div>
-              <a href="" class="btn btn-success">Agregar</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card shadow-sm">
-          <img src="Producto/short8.jpg" alt="" width="450" height="400">
-          <div class="card-body">
-            <h2 class="card-title">SHORTS 1</h2>
-            <h2 class="card-text">$000</h2>
-            <div class="d-flex justify-content-between align-items-center">
-              <div class="btn-group">
-                <a href="" class="btn btn-primary">Detalles</a>
-              </div>
-              <a href="" class="btn btn-success">Agregar</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card shadow-sm">
-          <img src="Producto/short9.jpg" alt="" width="450" height="400">
-          <div class="card-body">
-            <h2 class="card-title">SHORTS 1</h2>
-            <h2 class="card-text">$000</h2>
-            <div class="d-flex justify-content-between align-items-center">
-              <div class="btn-group">
-                <a href="" class="btn btn-primary">Detalles</a>
-              </div>
-              <a href="" class="btn btn-success">Agregar</a>
-            </div>
-          </div>
-        </div>
-      </div>
+      <?php } ?>
     </div>
   </main>
 
@@ -263,6 +155,28 @@ if (isset($_SESSION['user_id'])) {
   </footer>
   <!-- pie de pagina final -->
   <script src="JS/script.js"></script>
+  <script>
+    function addProducto(id, token) {
+      let url = 'carrito.php';
+      let formData = new FormData();
+      formData.append('id', id);
+      formData.append('token', token);
+
+      fetch(url, {
+          method: 'POST',
+          body: formData,
+          mode: 'cors'
+        }).then(response => response.json())
+        .then(data => {
+          if (data.ok) {
+            let elemento = document.getElementById("num_cart");
+            elemento.innerHTML = data.numero
+          }
+        })
+
+
+    }
+  </script>
 
 </body>
 
